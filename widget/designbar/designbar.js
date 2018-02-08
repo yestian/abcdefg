@@ -1017,12 +1017,18 @@ exports.iframe_enable = function (status) {
  * 激活节点的时候，1.网站底部显示当前节点的面包屑导航2.右侧工具栏
  */
 exports.iframe_active = function () {
+    $('#site-iframe-next').livequery(function(){
+        $(this).mouseleave(function(){
+            //鼠标离开框架，删除hover产生的辅助线
+            $('.hovered-outline').remove();
+        });
+    });
     var son = $('#site-iframe-next').contents();
     //遍历节点
     son.find('[data-w-id]').each(function () {
         var id = $(this).attr('data-w-id');
         //-------------------------------------事件-------------------------
-
+        //进入事件
         $(this).mouseenter(function (e) {
             exports.node_enter_outline(e);
         });
@@ -1069,7 +1075,6 @@ exports.node_enter_outline = function (e) {
     } else {
         $('.hovered-outline').addClass('inside');
     }
-
 }
 /**
  * 节点click事件
@@ -1441,10 +1446,10 @@ exports.node_outline_icon_mouse = function () {
                 //以上为寻找$e定位点
                 //创建辅助线
                 exports.create_click_selected($e);
+                //给selected创建一个标记，在mouseup的时候，在mouseenter里面判断，去掉由此产生的hover事件
+                //$('.selected-outline').addClass('fromparent');
                 exports.node_outline_icon_set($e, 3);//e是点击的节点事件，修正节点图片
                 exports.get_bottom_breadcrumb($e);//面包屑导航实时变化
-                //在mouseup的时候，如何去掉由此产生的hover事件
-                
             }
         });
         //鼠标进入事件
