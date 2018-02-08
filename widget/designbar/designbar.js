@@ -496,6 +496,10 @@ exports.hide_empty = function () {
     var son = $('#site-iframe-next').contents();
     $('.chrome-show-empty').livequery(function () {
         $(this).parent().click(function (e) {
+            //为了避免隐藏空元素后，selected对齐不一致，此处删除selected辅助，删除clickmark标记
+            $('.selected-outline').remove();
+            son.find('.clickmark').removeClass('clickmark');
+            
             //先判断，如果有，点击后去掉active,去掉wf-empty
             if ($(this).is('.active')) {
                 $(this).removeClass('active');
@@ -1315,7 +1319,7 @@ exports.getNodeIco = function (e, info) {
     if (e.prop('tagName').toLowerCase() == 'a') {
         res = (info == 'ico') ? 'n-a' : '文本链接';
     }
-    if (e.prop('tagName').toLowerCase() == 'div' && (((typeof e.attr('class')) == 'undefined') || e.attr('class') == 'clickmark') || e.attr('class') == '') {
+    if (e.prop('tagName').toLowerCase() == 'div' && (((typeof e.attr('class') == 'undefined') || e.attr('class') == 'clickmark') || e.attr('class') == '')) {
         res = (info == 'ico') ? 'n-textdiv' : '文本块';
     }
     if (e.prop('tagName').toLowerCase() == 'blockquote') {
