@@ -16,9 +16,7 @@ exports.init = function () {
     a.hide_topbar();//隐藏顶部工具栏
     a.menuIconMouseEnterTip();//鼠标悬停在菜单图标上，提示信息
     a.iframeclick();//点击框架，隐藏bar工具栏
-    a.show_edges();//显示元素边缘
-    a.hide_empty();//隐藏空元素
-    a.show_grid();//显示网格背景
+
     a.resize_workspace();//调整工作区的宽度
     a.media_toggle();//媒体类型切换,宽度初始化
     a.leftmenu_click();

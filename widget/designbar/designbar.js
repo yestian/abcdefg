@@ -324,7 +324,10 @@ exports.leftmenu_click = function () {
                 exports.delete_submenu();
             }
         }
-    })
+    });
+    exports.show_edges();//显示元素边缘
+    exports.hide_empty();//隐藏空元素
+    exports.show_grid();//显示网格背景
 }
 
 //菜单元素的tip提示信息
@@ -490,13 +493,30 @@ exports.show_edges = function () {
 //隐藏空元素，
 //如果是激活状态，创建新元素时，执行此方法，即新的空元素是看不到的，只显示一个辅助工具
 exports.hide_empty = function () {
+    var son = $('#site-iframe-next').contents();
     $('.chrome-show-empty').livequery(function () {
-        $(this).click(function () {
-            $(this).parent().toggleClass('active');
-            if ($(this).parent().is('.active')) {
-                console.log('显示空元素');
+        $(this).parent().click(function (e) {
+            //先判断，如果有，点击后去掉active,去掉wf-empty
+            if ($(this).is('.active')) {
+                $(this).removeClass('active');
+                son.find('[data-w-id]').each(function () {
+                    $(this).removeClass('wf-empty');
+                    $(this).removeClass('wf-empty-block');
+                });
             } else {
-                console.log('隐藏空元素');
+                $(this).addClass('active');
+                var arr=['img','input'];
+                //显示空元素，也是默认状态
+                son.find('[data-w-id]').each(function () {
+                    var ele=$(this).prop('tagName').toLowerCase();
+                    if (($(this).html() == '') && ($.inArray(ele,arr)==-1)) {
+                        $(this).addClass('wf-empty');
+                    }
+                    if(ele=='li'){
+                        //除了li应该还有其他元素
+                        $(this).addClass('wf-empty-block');
+                    }
+                });
             }
         });
     })
@@ -996,7 +1016,7 @@ exports.iframe_init = function (siteid, pageid) {
         body.addClass('body');
         //测试数据
         body.attr('data-w-id', '1111');
-        body.append('<div data-duration-in="300" data-duration-out="100" data-w-id="2d568bec-d3db-c2cb-b1d6-1b1dd6468c7c" class="w-tabs"><div data-w-id="67b50125-e2de-9982-6b8c-e8d7b24e56d5" class="w-tab-content"><div data-w-tab="Tab 1" data-w-id="d52b8942-1c53-efc1-92ff-7eb5fdf01bb7" class="w-tab-pane w--tab-active"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" data-w-id="6e268d27-eab2-d09c-f169-f7028cf0f49d" class="image-2"></div><div data-w-tab="Tab 2" data-w-id="67223cf5-489a-cf1e-19c0-a3a61c809ae8" class="wf-empty w-tab-pane"></div><div data-w-tab="Tab 3" data-w-id="58085806-72fe-c166-1f9e-6348c3d3b0a3" class="wf-empty w-tab-pane"></div></div></div><div data-animation="default" class="w-nav" data-collapse="medium" data-w-id="347f63a1-1533-da8f-2ef8-a1716a61d2ea" data-duration="400"><div data-w-id="1346393e-d098-8291-6b56-0e48787921c7" class="w-container"><a href="#" data-w-id="596aca23-8200-485a-f0ce-8c495f10e765" class="wf-empty w-nav-brand"></a><nav role="navigation" data-w-id="1c78fb23-efe0-8964-771e-b2ae32fdafbb" class="w-nav-menu"><a href="#" data-w-id="731f23cf-6662-0a72-9e5e-55afc24ba525" class="w-nav-link" style="max-width: 940px;">Home</a><a href="#" data-w-id="cf489713-1f10-2903-b7eb-f20453b27610" class="w-nav-link" style="max-width: 940px;">About</a><a href="#" data-w-id="856ba6bd-30cb-d00a-a8d5-2b78fb958b51" class="w-nav-link" style="max-width: 940px;">Contact</a></nav><div data-w-id="24fdfc90-62cc-41f2-89e8-8b6b7512034b" class="w-nav-button"><div data-w-id="6ceeaacc-6a50-7318-dd8b-14091c3a4ea5" class="w-icon-nav-menu"></div></div></div></div><div data-duration-in="300" data-duration-out="100" data-w-id="1dabedd4-57ae-f0e8-5fa7-06813e29bae6" class="w-tabs"><div data-w-id="eebf8c18-2aa3-f2ed-9b86-70283ffa664f" class="w-tab-menu"><a data-w-tab="Tab 1" data-w-id="d7027f52-d3bf-339a-ce0f-fd30e5e67635" class="w-inline-block w-tab-link w--current"><div data-w-id="d7027f52-d3bf-339a-ce0f-fd30e5e67636">Tab 1</div></a><a data-w-tab="Tab 2" data-w-id="19ad50a7-a75e-c93d-719a-40e02819f23b" class="w-inline-block w-tab-link"><div data-w-id="19ad50a7-a75e-c93d-719a-40e02819f23c">Tab 2</div></a><a data-w-tab="Tab 3" data-w-id="4d950cb2-f729-c516-1241-2f7607dbe3a1" class="w-inline-block w-tab-link"><div data-w-id="4d950cb2-f729-c516-1241-2f7607dbe3a2">Tab 3</div></a></div><div data-w-id="ff06501f-5ef7-4f79-1a41-54ff1e7d1643" class="w-tab-content"><div data-w-tab="Tab 1" data-w-id="e32f5c43-aac6-f8b7-83b1-9c0dc1a01306" class="wf-empty w-tab-pane w--tab-active"></div><div data-w-tab="Tab 2" data-w-id="6b54d4aa-0aa9-d494-89c1-0d12bc55dc1c" class="wf-empty w-tab-pane"></div><div data-w-tab="Tab 3" data-w-id="20b311a4-5448-7d98-e9fd-4a90c48912ac" class="wf-empty w-tab-pane"></div></div></div><div data-w-id="1e4142ee-fcf3-4332-3297-0534aca3bf26" class="w-container"><p data-w-id="574a03c6-7b9c-0583-34b8-8aaea6cfd177">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p></div><ul data-w-id="3630ffbf-25f2-8919-38d7-98977b1471be"><li data-w-id="056d09ba-bba7-0fd9-6e22-9f7334c3aa00" class="wf-empty-block"></li><li data-w-id="6f7e5c14-6ad4-0f53-6632-6586370077dc" class="wf-empty-block"></li><li data-w-id="bbeb9900-ebf2-cae2-9bb2-ff37e1f4cb02" class="wf-empty-block"></li></ul><div data-w-id="fd77daaf-a72a-d2c4-ebce-59c00b659710" class="w-richtext"><h2 data-w-id="2148e3af-fa6d-ba7f-018d-e228a83235eb">What’s a Rich Text element?</h2><p data-w-id="1e6841e7-865c-c9aa-c08e-f2e28be1bb81">The rich text element allows you to create and format headings, paragraphs, blockquotes, images, and video all in one place instead of having to add and format them individually. Just double-click and easily create content.</p><h4 data-w-id="04cb47fe-6eed-8585-dbc1-ec2f412268b0">Static and dynamic content editing</h4><p data-w-id="b4eeec0e-7438-59cb-1306-761ab3f33ee0">A rich text element can be used with static or dynamic content. For static content, just drop it into any page and begin editing. For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Voila!</p><h4 data-w-id="99bfb759-9cbd-fc61-0ee5-56fdc32cffea">How to customize formatting for each rich text</h4><p data-w-id="e319612f-7c7b-ed6d-debf-df61066cac0f">Headings, paragraphs, blockquotes, figures, images, and figure captions can all be styled after a class is added to the rich text element using the "When inside of" nested selector system.</p></div><div data-w-id="07669ad5-c91c-ffa3-7e08-bbcbace13225" class="w-video w-embed"></div><div data-w-id="34049236-a342-f078-e1da-66627308a30f" class="w-form"><form id="email-form" name="email-form" data-name="Email Form" data-w-id="3b6eb72a-450f-f364-1925-b170cf70e83c"><label data-w-id="92da33e5-745d-c127-608e-e34a58ab9b07">Name:</label><input type="text" class="w-input" name="name" data-name="Name" placeholder="Enter your name" data-w-id="7e0f7368-e9ac-7780-df65-48e82e8a4531" id="name"><label data-w-id="1cf00b78-1bd7-36f0-a8fc-6d43e264b016">Email Address:</label><input type="text" class="w-input" name="email" data-name="Email" placeholder="Enter your email" data-w-id="77cd3618-dc5f-aad6-b83c-b977f8223604" id="email" required=""><input type="submit" value="Submit" data-wait="Please wait..." data-w-id="029725f6-2017-817a-0a78-2fd22b4bd64e" class="w-button"></form><div data-w-id="fbf20503-4d21-d72b-a7de-7399247d003a" class="w-form-done"><div data-w-id="fca6f67c-0ca2-07b4-558b-e575c07d29cb">Thank you! Your submission has been received!</div></div><div data-w-id="9d26640d-c442-632e-b52f-b1f663c9f545" class="w-form-fail"><div data-w-id="9b4929f0-bbba-98ce-e76e-fc532b9c687a">Oops! Something went wrong while submitting the form.</div></div></div><div id="lightbox-mountpoint"></div>');
+        body.append('<div data-autoplay="true" data-loop="true" data-wf-ignore="true" data-w-id="ec863bde-a3e2-6ae0-1145-438dbafe9bb0" class="w-background-video w-background-video-atom"><video loop="loop" data-wf-ignore=""></video></div><h1 data-w-id="7040471b-701f-5e44-48c0-d9c6e9088fbb">Heading</h1><div data-w-id="c77a54e8-badb-cf03-dd15-cbb9b97db3d1" class="w-row"><div data-w-id="45aea8b5-5143-cd4d-f767-aa70479a73fa" class="wf-empty w-col w-col-4"></div><div data-w-id="d33523ef-a812-58f6-9b07-81390db2ebf3" class="wf-empty w-col w-col-4"></div><div data-w-id="5724dff5-b28d-835e-df8a-24eb85c11005" class="wf-empty w-col w-col-4"></div></div><ul data-w-id="ba920b62-4eed-104e-ba40-62ea4763d3ac"><li data-w-id="3d71b16a-e23b-b5e3-6727-cc2c9a9a432e" class="wf-empty-block"></li><li data-w-id="74d589c4-9cc0-44ee-b76c-be1f3875efd5" class="wf-empty-block"></li><li data-w-id="3a78fda3-2c6d-a926-0f72-e6d2124a9e8f" class="wf-empty-block"></li></ul><div data-w-id="9597dd38-aa5a-43d9-f5cd-a0ec287d8e03" class="w-form"><form id="email-form" name="email-form" data-name="Email Form" data-w-id="ab587708-8a70-aae6-6d97-2b7bf36f79e8"><label data-w-id="443097ed-0fc6-c0d8-29db-596092e12da2">Name:</label><select id="field" name="field" data-w-id="5af9fa56-ffba-440f-8dda-ae3a08aae08e" class="w-select"><option value="">Select one...</option><option value="First">First Choice</option><option value="Second">Second Choice</option><option value="Third">Third Choice</option></select><input type="text" class="w-input" name="name" data-name="Name" placeholder="Enter your name" data-w-id="c01ea8da-a046-ce3d-eff8-886e37d3768c" id="name"><label data-w-id="c9946178-0f16-0b2a-33e6-623bda376e58">Email Address:</label><input type="text" class="w-input" name="email" data-name="Email" placeholder="Enter your email" data-w-id="51ec8d17-300a-4891-0515-f16cc721277a" id="email" required=""><input type="submit" value="Submit" data-wait="Please wait..." data-w-id="1eec79e2-7247-e1ad-3d42-23f39ae0132d" class="w-button"></form><div data-w-id="5c23572b-62f6-1d4b-a857-c3052f5426db" class="w-form-done"><div data-w-id="d67d4eaf-32ef-4b6a-2170-957778f92fdb">Thank you! Your submission has been received!</div></div><div data-w-id="04f27715-1cdc-6cfb-62d2-3a40a0546f7f" class="w-form-fail"><div data-w-id="907927c7-10c6-3baa-ea7d-456357df716b">Oops! Something went wrong while submitting the form.</div></div></div><a href="#" data-w-id="40eabadc-7bb9-230a-27fa-bfc5e887b3ec" class="w-button">Button Text</a><a href="#" data-w-id="40ba6152-def1-4122-fdde-9869b2b04f51" class="w-inline-block wf-empty"></a><div id="lightbox-mountpoint"></div>');
     });
 }
 
@@ -1031,7 +1051,7 @@ exports.iframe_active = function () {
         //-------------------------------------事件-------------------------
         //进入事件
         $(this).mouseenter(function (e) {
-            if(globalMousetype=='mouseup'){
+            if (globalMousetype == 'mouseup') {
                 $('.hovered-outline').remove();
                 globalMousetype = e.type;
                 return false;
@@ -1039,11 +1059,11 @@ exports.iframe_active = function () {
             }
             exports.node_enter_outline(e);
         });
-        $(this).mousemove(function(e){
+        $(this).mousemove(function (e) {
             //在上面mouseup的时候禁止的mouseenter的一种补偿操作
-            if($('.hovered-outline').length){
+            if ($('.hovered-outline').length) {
                 return false;
-            }else{
+            } else {
                 exports.node_enter_outline(e);
             }
         });
@@ -1141,8 +1161,19 @@ exports.node_size = function (e, size) {
 exports.create_click_selected = function (e) {
     $('.selected-outline').remove();//先移除其他的，然后重新创建
     var selected = '<div class="bem-OutlineSelectedNode selected-outline wf-outline active" style="top: 0px; left: 0px; transform: translate(' + exports.node_size(e, 'x') + 'px, ' + exports.node_size(e, 'y') + 'px); width: ' + exports.node_size(e, 'w') + 'px; height: ' + exports.node_size(e, 'h') + 'px;"><div class="breadcrumbs"><div class="inner"><div class="crumbs clearfix" title="Show More"><div class="crumb current"><div class="inner"><span class="icon"><i class="el-icon"></i></span><span class="label"></span></div></div></div></div></div></div>';
+    
     //如果节点有上级节点，把上级节点添加到列表中，最多允许三级
     $('.resize-hint').after(selected);
+
+     //添加辅助功能，通过点击设置按钮，可以根据不同的节点类型，弹出不同的layer
+     var inarr=['img','a','ul','h1','h2','h3','h4','h5','h6','form','input','textarea','select'];
+     var nodetype=e.prop('tagName').toLowerCase();
+     if(e.is('.w-background-video')||e.is('.w-video')||e.is('.w-col') ||e.is('.w-row') || e.is('.w-button') || e.is('.w-inline-block') || $.inArray(nodetype,inarr)!=-1){
+        var sons= $('.selected-outline .current .inner');
+        sons.addClass('has-mini-settings').append('<span class="icon open-mini-settings" title="显示设置"><i class="icon-main"></i></span>');
+    }
+
+
     //添加显示方向
     if (!e.is('.body')) {
         if (e.offset().top < 50) {
@@ -1176,7 +1207,7 @@ exports.node_outline_init = function (e) {
     //3.节点辅助线加载初始样式
     var hovered = '<div class="bem-OutlineHoveredNode hovered-outline wf-outline active" style="top: 0px; left: 0px; transform: translate(' + exports.node_size($e, 'x') + 'px, ' + exports.node_size($e, 'y') + 'px); width: ' + exports.node_size($e, 'w') + 'px; height: ' + exports.node_size($e, 'h') + 'px;"><div class="breadcrumbs"><div class="inner"><div class="crumbs clearfix" title="Show More"><div class="crumb current"><div class="inner"><span class="icon"><i class="el-icon"></i></span><span class="label"></span></div></div></div></div></div></div>';
     //根据事件类型，执行不同的函数
-    if (e.type == 'mouseenter' || e.type=='mousemove') {
+    if (e.type == 'mouseenter' || e.type == 'mousemove') {
         $('.resize-hint').after(hovered);
         exports.node_outline_icon_set($e, 1);
     } else if (e.type == 'mouseleave') {
@@ -1240,6 +1271,9 @@ exports.getNodeIco = function (e, info) {
         res = (info == 'ico') ? 'n-div' : '横向容器';
     }
     if (e.is('.w-col')) {
+        res = (info == 'ico') ? 'n-column' : '列元素';
+    }
+    if (e.is('.w-row')) {
         res = (info == 'ico') ? 'n-column' : '多列容器';
     }
     if (e.attr('class') == 'wf-empty' || e.attr('class') == 'wf-empty clickmark') {
@@ -1295,6 +1329,9 @@ exports.getNodeIco = function (e, info) {
     }
     if (e.is('.w-video')) {
         res = (info == 'ico') ? 'n-video' : '视频';
+    }
+    if (e.is('.w-background-video')) {
+        res = (info == 'ico') ? 'n-backgroundvideo' : '背景视频';
     }
     if (e.is('.w-form')) {
         res = (info == 'ico') ? 'n-div' : '表单容器';
