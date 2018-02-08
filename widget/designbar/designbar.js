@@ -1017,8 +1017,9 @@ exports.iframe_enable = function (status) {
  * 激活节点的时候，1.网站底部显示当前节点的面包屑导航2.右侧工具栏
  */
 exports.iframe_active = function () {
-    $('#site-iframe-next').livequery(function(){
-        $(this).mouseleave(function(){
+    var globalMousetype;
+    $('#site-iframe-next').livequery(function () {
+        $(this).mouseleave(function () {
             //鼠标离开框架，删除hover产生的辅助线
             $('.hovered-outline').remove();
         });
@@ -1030,9 +1031,22 @@ exports.iframe_active = function () {
         //-------------------------------------事件-------------------------
         //进入事件
         $(this).mouseenter(function (e) {
+            if(globalMousetype=='mouseup'){
+                $('.hovered-outline').remove();
+                globalMousetype = e.type;
+                return false;
+                //有一个小小的问题，当前元素，无法执行mouseenter函数
+            }
             exports.node_enter_outline(e);
         });
-
+        $(this).mousemove(function(e){
+            //在上面mouseup的时候禁止的mouseenter的一种补偿操作
+            if($('.hovered-outline').length){
+                return false;
+            }else{
+                exports.node_enter_outline(e);
+            }
+        });
         //离开事件
         $(this).mouseleave(function (e) {
             //鼠标离开iframe进入了主框架
@@ -1052,7 +1066,12 @@ exports.iframe_active = function () {
 
         });
     });
-
+    //非节点元素的处理
+    son.find('.crumb').livequery(function () {
+        $(this).mouseup(function (e) {
+            globalMousetype = e.type;
+        });
+    });
 }
 
 /**
@@ -1157,7 +1176,7 @@ exports.node_outline_init = function (e) {
     //3.节点辅助线加载初始样式
     var hovered = '<div class="bem-OutlineHoveredNode hovered-outline wf-outline active" style="top: 0px; left: 0px; transform: translate(' + exports.node_size($e, 'x') + 'px, ' + exports.node_size($e, 'y') + 'px); width: ' + exports.node_size($e, 'w') + 'px; height: ' + exports.node_size($e, 'h') + 'px;"><div class="breadcrumbs"><div class="inner"><div class="crumbs clearfix" title="Show More"><div class="crumb current"><div class="inner"><span class="icon"><i class="el-icon"></i></span><span class="label"></span></div></div></div></div></div></div>';
     //根据事件类型，执行不同的函数
-    if (e.type == 'mouseenter') {
+    if (e.type == 'mouseenter' || e.type=='mousemove') {
         $('.resize-hint').after(hovered);
         exports.node_outline_icon_set($e, 1);
     } else if (e.type == 'mouseleave') {
