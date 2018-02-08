@@ -1088,7 +1088,7 @@ exports.node_click_outline = function (e) {
     }
     //创建辅助
     exports.node_outline_init(e);//初始化
-    exports.get_bottom_breadcrumb(e);//面包屑导航实时变化
+    exports.get_bottom_breadcrumb($e);//面包屑导航实时变化
 }
 /**
  * 节点尺寸，为辅助工具提供
@@ -1135,7 +1135,7 @@ exports.create_click_selected = function (e) {
     if (typeof (e.parent().parent().attr('data-w-id')) != 'undefined') {
         $(".selected-outline .crumbs").prepend('<div class="crumb"><div class="inner"><span class="icon"><i class="el-icon"></i></span><span class="label"></span></div></div>');
     }
-    
+
 }
 /**
  * 辅助工具初始化
@@ -1168,7 +1168,7 @@ exports.node_outline_init = function (e) {
  * 根据鼠标事件对象e,和鼠标事件类型区分1为enter,2为leave,3为click
  */
 exports.node_outline_icon_set = function (e, mousetype) {
-    var $e=e;
+    var $e = e;
     var a = $('.hovered-outline'),
         b = $('.selected-outline'),
         c, d, f;
@@ -1371,7 +1371,7 @@ exports.getNodeIco = function (e, info) {
 exports.get_bottom_breadcrumb = function (e) {
     $('.bem-BottomBar_Placeholder').remove();
     $('.bem-Breadcrumbs_Container').html('');//清空
-    var $e = $(e.target);
+    var $e = e;
     do {
         $('.bem-Breadcrumbs_Container').append('<div class="bem-Breadcrumbs_Breadcrumb " style="background-color: rgb(235, 235, 235);"><svg width="7" height="28" viewBox="0 0 7 28" class="bem-Svg left notch" style="display: block; transform: translate(0px, 0px); color: rgb(235, 235, 235);"><path fill="currentColor" d="M6.5 14L.5 0H0v28h.5z"></path><path fill="#858585" d="M1 0H0l6 14-6 14h1l6-14z"></path></svg><div class="bem-Breadcrumbs_Breadcrumb_Inner "><i class="el-icon ' + exports.getNodeIco($e, 'ico') + '"></i><div class="label">' + exports.getNodeIco($e, 'txt') + '</div></div><svg width="7" height="28" viewBox="0 0 7 28" class="bem-Svg right notch" style="display: block; transform: translate(0px, 0px); color: rgb(235, 235, 235);"><path fill="currentColor" d="M.5 0l6 14-6 14H7V0z"></path><path fill="#858585" d="M1 0H0l6 14-6 14h1l6-14z"></path></svg></div>');
         $e = $e.parent();//循环
@@ -1396,20 +1396,20 @@ exports.bottom_breadcrumb_mouse = function () {
         });
         $(this).click(function () {
             //点击底部导航，第一步找到当前点击的index,第二步找到clickmark，通过循环找到index对应的节点
-            var i=$(this).index();
-            var $node=$('#site-iframe-next').contents().find('.clickmark');
-            if(i==0){return false;}
+            var i = $(this).index();
+            var $node = $('#site-iframe-next').contents().find('.clickmark');
+            if (i == 0) { return false; }
             //如果点击的不是当前已经选中的节点，执行如下操作
             $node.removeClass('clickmark');
-            for(var p=0;p<i;p++){
-                $node=$node.parent();
+            for (var p = 0; p < i; p++) {
+                $node = $node.parent();
             }
             //移动clickmark的位置
             $node.addClass('clickmark');
             exports.create_click_selected($node);
             exports.node_outline_icon_set($node, 3);
-             //移除面包屑导航剩下的元素
-             $(this).prevAll().remove();
+            //移除面包屑导航剩下的元素
+            $(this).prevAll().remove();
         });
     })
 }
@@ -1442,10 +1442,11 @@ exports.node_outline_icon_mouse = function () {
                 //创建辅助线
                 exports.create_click_selected($e);
                 exports.node_outline_icon_set($e, 3);//e是点击的节点事件，修正节点图片
+                exports.get_bottom_breadcrumb($e);//面包屑导航实时变化
+                //在mouseup的时候，如何去掉由此产生的hover事件
+                
             }
-
         });
-
         //鼠标进入事件
         $(this).find('.crumb').mouseenter(function () {
             //鼠标进入辅助工具，删除hover辅助
