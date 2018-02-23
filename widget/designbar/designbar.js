@@ -1072,12 +1072,13 @@ exports.iframe_active = function () {
             if ($('.hovered-outline').length) {
                 return false;
             } else {
+                //在这两者同时存在，才触发mousemove事件
                 if(MouseType2=='mouseenter' && MouseType=='mouseup'){
                     MoveStep++;
                     if(MoveStep>3){
-                        MouseType='';
-                        MouseType2='';
-                        MoveStep=0;
+                        MouseType='';//清空mouseup
+                        MouseType2='';//清空mouseenter
+                        MoveStep=0;//清空mousemove的步数
                         exports.node_enter_outline(e);
                     }
                     
