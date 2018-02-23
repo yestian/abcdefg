@@ -1020,7 +1020,7 @@ exports.iframe_init = function (siteid, pageid) {
         body.addClass('body');
         //测试数据
         body.attr('data-w-id', '1111');
-        body.append('<div data-autoplay="true" data-loop="true" data-wf-ignore="true" data-w-id="ec863bde-a3e2-6ae0-1145-438dbafe9bb0" class="w-background-video w-background-video-atom"><video loop="loop" data-wf-ignore=""></video></div><h1 data-w-id="7040471b-701f-5e44-48c0-d9c6e9088fbb">Heading</h1><div data-w-id="c77a54e8-badb-cf03-dd15-cbb9b97db3d1" class="w-row"><div data-w-id="45aea8b5-5143-cd4d-f767-aa70479a73fa" class="wf-empty w-col w-col-4"></div><div data-w-id="d33523ef-a812-58f6-9b07-81390db2ebf3" class="wf-empty w-col w-col-4"></div><div data-w-id="5724dff5-b28d-835e-df8a-24eb85c11005" class="wf-empty w-col w-col-4"></div></div><ul data-w-id="ba920b62-4eed-104e-ba40-62ea4763d3ac"><li data-w-id="3d71b16a-e23b-b5e3-6727-cc2c9a9a432e" class="wf-empty-block"></li><li data-w-id="74d589c4-9cc0-44ee-b76c-be1f3875efd5" class="wf-empty-block"></li><li data-w-id="3a78fda3-2c6d-a926-0f72-e6d2124a9e8f" class="wf-empty-block"></li></ul><div data-w-id="9597dd38-aa5a-43d9-f5cd-a0ec287d8e03" class="w-form"><form id="email-form" name="email-form" data-name="Email Form" data-w-id="ab587708-8a70-aae6-6d97-2b7bf36f79e8"><label data-w-id="443097ed-0fc6-c0d8-29db-596092e12da2">Name:</label><select id="field" name="field" data-w-id="5af9fa56-ffba-440f-8dda-ae3a08aae08e" class="w-select"><option value="">Select one...</option><option value="First">First Choice</option><option value="Second">Second Choice</option><option value="Third">Third Choice</option></select><input type="text" class="w-input" name="name" data-name="Name" placeholder="Enter your name" data-w-id="c01ea8da-a046-ce3d-eff8-886e37d3768c" id="name"><label data-w-id="c9946178-0f16-0b2a-33e6-623bda376e58">Email Address:</label><input type="text" class="w-input" name="email" data-name="Email" placeholder="Enter your email" data-w-id="51ec8d17-300a-4891-0515-f16cc721277a" id="email" required=""><input type="submit" value="Submit" data-wait="Please wait..." data-w-id="1eec79e2-7247-e1ad-3d42-23f39ae0132d" class="w-button"></form><div data-w-id="5c23572b-62f6-1d4b-a857-c3052f5426db" class="w-form-done"><div data-w-id="d67d4eaf-32ef-4b6a-2170-957778f92fdb">Thank you! Your submission has been received!</div></div><div data-w-id="04f27715-1cdc-6cfb-62d2-3a40a0546f7f" class="w-form-fail"><div data-w-id="907927c7-10c6-3baa-ea7d-456357df716b">Oops! Something went wrong while submitting the form.</div></div></div><a href="#" data-w-id="40eabadc-7bb9-230a-27fa-bfc5e887b3ec" class="w-button">Button Text</a><a href="#" data-w-id="40ba6152-def1-4122-fdde-9869b2b04f51" class="w-inline-block wf-empty"></a><div id="lightbox-mountpoint"></div>');
+        body.append('<h1 data-w-id="7040471b-701f-5e44-48c0-d9c6e9088fbb">Heading</h1><div data-w-id="c77a54e8-badb-cf03-dd15-cbb9b97db3d1" class="w-row"><div data-w-id="45aea8b5-5143-cd4d-f767-aa70479a73fa" class="wf-empty w-col w-col-4"></div><div data-w-id="d33523ef-a812-58f6-9b07-81390db2ebf3" class="wf-empty w-col w-col-4"></div><div data-w-id="5724dff5-b28d-835e-df8a-24eb85c11005" class="wf-empty w-col w-col-4"></div></div><ul data-w-id="ba920b62-4eed-104e-ba40-62ea4763d3ac"><li data-w-id="3d71b16a-e23b-b5e3-6727-cc2c9a9a432e" class="wf-empty-block"></li><li data-w-id="74d589c4-9cc0-44ee-b76c-be1f3875efd5" class="wf-empty-block"></li><li data-w-id="3a78fda3-2c6d-a926-0f72-e6d2124a9e8f" class="wf-empty-block"></li></ul><div data-w-id="9597dd38-aa5a-43d9-f5cd-a0ec287d8e03" class="w-form"><form id="email-form" name="email-form" data-name="Email Form" data-w-id="ab587708-8a70-aae6-6d97-2b7bf36f79e8"><label data-w-id="443097ed-0fc6-c0d8-29db-596092e12da2">Name:</label><select id="field" name="field" data-w-id="5af9fa56-ffba-440f-8dda-ae3a08aae08e" class="w-select"><option value="">Select one...</option><option value="First">First Choice</option><option value="Second">Second Choice</option><option value="Third">Third Choice</option></select><input type="text" class="w-input" name="name" data-name="Name" placeholder="Enter your name" data-w-id="c01ea8da-a046-ce3d-eff8-886e37d3768c" id="name"><label data-w-id="c9946178-0f16-0b2a-33e6-623bda376e58">Email Address:</label><input type="text" class="w-input" name="email" data-name="Email" placeholder="Enter your email" data-w-id="51ec8d17-300a-4891-0515-f16cc721277a" id="email" required=""><input type="submit" value="Submit" data-wait="Please wait..." data-w-id="1eec79e2-7247-e1ad-3d42-23f39ae0132d" class="w-button"></form><div data-w-id="5c23572b-62f6-1d4b-a857-c3052f5426db" class="w-form-done"><div data-w-id="d67d4eaf-32ef-4b6a-2170-957778f92fdb">Thank you! Your submission has been received!</div></div><div data-w-id="04f27715-1cdc-6cfb-62d2-3a40a0546f7f" class="w-form-fail"><div data-w-id="907927c7-10c6-3baa-ea7d-456357df716b">Oops! Something went wrong while submitting the form.</div></div></div><a href="#" data-w-id="40eabadc-7bb9-230a-27fa-bfc5e887b3ec" class="w-button">Button Text</a><a href="#" data-w-id="40ba6152-def1-4122-fdde-9869b2b04f51" class="w-inline-block wf-empty"></a><div id="lightbox-mountpoint"></div>');
     });
 }
 
@@ -1041,7 +1041,9 @@ exports.iframe_enable = function (status) {
  * 激活节点的时候，1.网站底部显示当前节点的面包屑导航2.右侧工具栏
  */
 exports.iframe_active = function () {
-    var globalMousetype;
+    var MouseType='';
+    var MouseType2='';
+    var MoveStep=0;//mousemove事件
     $('#site-iframe-next').livequery(function () {
         $(this).mouseleave(function () {
             //鼠标离开框架，删除hover产生的辅助线
@@ -1055,22 +1057,35 @@ exports.iframe_active = function () {
         //-------------------------------------事件-------------------------
         //进入事件
         $(this).mouseenter(function (e) {
-            if (globalMousetype == 'mouseup') {
+            //点击之后产生的mouseup
+            if (MouseType == 'mouseup') {
+                MouseType2=e.type;//修改为mouseenter,共mousemove事件判断
                 $('.hovered-outline').remove();
-                globalMousetype = e.type;
                 return false;
-                //有一个小小的问题，当前元素，无法执行mouseenter函数
             }
-            exports.node_enter_outline(e);
+             exports.node_enter_outline(e);
+            
         });
+
         $(this).mousemove(function (e) {
             //在上面mouseup的时候禁止的mouseenter的一种补偿操作
             if ($('.hovered-outline').length) {
                 return false;
             } else {
-                exports.node_enter_outline(e);
+                if(MouseType2=='mouseenter' && MouseType=='mouseup'){
+                    MoveStep++;
+                    if(MoveStep>3){
+                        MouseType='';
+                        MouseType2='';
+                        MoveStep=0;
+                        exports.node_enter_outline(e);
+                    }
+                    
+                }
+                
             }
         });
+
         //离开事件
         $(this).mouseleave(function (e) {
             //鼠标离开iframe进入了主框架
@@ -1091,9 +1106,11 @@ exports.iframe_active = function () {
         });
     });
     //非节点元素的处理
+    //点击元素上的辅助工具时候，不应该对元素产生影响
     son.find('.crumb').livequery(function () {
         $(this).mouseup(function (e) {
-            globalMousetype = e.type;
+            MouseType = e.type;//提供给mouseenter判断
+            return false;
         });
     });
 }
@@ -1263,6 +1280,11 @@ exports.node_outline_icon_set = function (e, mousetype) {
     }
 }
 
+/**
+ * 节点内容提示文字
+ * @param {*} e 
+ * @param {*} info 
+ */
 exports.getNodeIco = function (e, info) {
     var res = '';
     if (e.is('.body')) {
